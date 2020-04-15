@@ -11,3 +11,4 @@ import firebaseConfig from './config/firebaseConfig';
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
+export const githubProvider = new firebase.auth.GithubAuthProvider();
