@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './components/App';
 import store from './store';
-import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { theme } from './config/themeConfig';
 
 ReactDOM.render(
