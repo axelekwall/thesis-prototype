@@ -1,12 +1,14 @@
 import React, { FC, useCallback } from 'react';
 import { ResponsiveTreeMap } from '@nivo/treemap';
 import { FileNode } from '../data';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../store';
 import { DataState, DebtItem, DebtTypes } from '../store/data';
 import * as d3 from 'd3-scale-chromatic';
+import { actions } from '../store/ui';
 
 const TreeMap: FC = () => {
+  const dispatch = useDispatch();
   const { repo, items, levels } = useSelector<State, DataState>(
     (state) => state.data
   );
@@ -21,10 +23,16 @@ const TreeMap: FC = () => {
         case 'Documentation':
           return 'green';
         case 'Architecture':
-          return 'purpule';
+          return 'orange';
       }
     },
     [items]
+  );
+  const itemClicked = useCallback(
+    (d: { data: FileNode }) => {
+      dispatch(actions.fileSelected(d.data));
+    },
+    [dispatch]
   );
   const getColorBasedOnLevel = useCallback(
     (level: number): string => d3.schemeBlues[levels + 1][level + 1],
@@ -60,7 +68,7 @@ const TreeMap: FC = () => {
       borderColor={{ from: 'color', modifiers: [['darker', '0.3']] }}
       colors={matchColors}
       label={(node: FileNode): string => node.pathArray[node.level]}
-      onClick={(event: any): void => console.log(event)}
+      onClick={itemClicked}
     />
   );
 };

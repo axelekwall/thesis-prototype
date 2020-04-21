@@ -2,11 +2,22 @@ import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 import { FileNode } from '../data';
 import initialItems from '../data/initialItems';
 
-export type DebtTypes = 'Documentation' | 'Code' | 'Architecture';
+export type DebtTypes =
+  | 'Documentation'
+  | 'Code'
+  | 'Architectural'
+  | 'Environmental'
+  | 'Testing';
+export type Priority = 1 | 2 | 3;
+export type Estimate = 1 | 2 | 3 | 5 | 8;
 
 export interface DebtItem {
   path?: string;
-  deadline?: string;
+  deadline: number;
+  created: number;
+  completed?: number;
+  priority: Priority;
+  estimate: Estimate;
   description?: string;
   type: DebtTypes;
   id: string;

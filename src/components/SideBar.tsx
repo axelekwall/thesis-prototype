@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import {
   makeStyles,
   Theme,
@@ -10,8 +10,10 @@ import {
 } from '@material-ui/core';
 import { State } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
+import { format, compareAsc } from 'date-fns';
 import { DebtItem } from '../store/data';
 import { actions } from '../store/ui';
+import { FileNode } from '../data';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,28 +32,45 @@ const SideBar: FC = () => {
   const items = useSelector<State, Array<DebtItem>>(
     (state) => state.data.items
   );
+  const selectedFile = useSelector<State, FileNode | null>(
+    (state) => state.ui.selectedFile
+  );
+  const filterItems = useCallback(
+    (item: DebtItem) => {
+      if (selectedFile === null) return true;
+      return item.path?.includes(selectedFile.path);
+    },
+    [selectedFile]
+  );
   return (
     <List className={classes.root}>
-      {/* <Typography variant="subtitle1" className={classes.title}>
-        Upcoming items
-      </Typography> */}
       <ListSubheader component="div" id="nested-list-subheader">
-        Upcoming deadlines
+        {selectedFile === null
+          ? 'All debt items'
+          : `Debt items for ${selectedFile.path}${
+              selectedFile.type === 'tree' && selectedFile.level >= 0 ? '/' : ''
+            }`}
       </ListSubheader>
-      {items.map((item) => (
-        <ListItem key={item.description} alignItems="flex-start">
-          <ListItemText
-            onMouseEnter={(): void => {
-              dispatch(actions.itemfocused(item));
-            }}
-            onMouseLeave={(): void => {
-              dispatch(actions.itemfocused(null));
-            }}
-            primary={item.title}
-            secondary={item.deadline}
-          ></ListItemText>
-        </ListItem>
-      ))}
+      {items
+        .filter(filterItems)
+        .sort((a, b) => a.deadline - b.deadline)
+        .map((item) => (
+          <ListItem button key={item.id} alignItems="flex-start">
+            <ListItemText
+              onMouseEnter={(): void => {
+                dispatch(actions.itemfocused(item));
+              }}
+              onMouseLeave={(): void => {
+                dispatch(actions.itemfocused(null));
+              }}
+              onClick={(): void => {
+                dispatch(actions.itemSelected(item));
+              }}
+              primary={item.title}
+              secondary={format(new Date(item.deadline), 'PPP')}
+            ></ListItemText>
+          </ListItem>
+        ))}
     </List>
   );
 };

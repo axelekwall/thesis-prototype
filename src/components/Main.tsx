@@ -9,7 +9,10 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import Sunburst from './Sunburst';
+import { useSelector } from 'react-redux';
+import { FileNode } from '../data';
+import { State } from '../store';
+import CardList from './CardList';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,19 +34,28 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Main: FC = () => {
   const classes = useStyles();
+  const selectedFile = useSelector<State, FileNode | null>(
+    (state) => state.ui.selectedFile
+  );
   return (
     <main className={classes.main}>
       <Toolbar />
       <Grid container justify="center" spacing={4}>
-        <Grid item xs={12} xl={9}>
-          <Paper className={classes.card}>
-            <Typography className={classes.paperTitle} variant="h6">
-              Project Overview
-            </Typography>
-            <div className={classes.chartWrapper}>
-              <TreeMap />
-            </div>
-          </Paper>
+        <Grid item container xs={3} direction="column">
+          <CardList />
+        </Grid>
+
+        <Grid item container xs={9} direction="column">
+          <Grid item xs={12} xl={9}>
+            <Paper className={classes.card}>
+              <Typography className={classes.paperTitle} variant="h6">
+                Project Overview
+              </Typography>
+              <div className={classes.chartWrapper}>
+                <TreeMap />
+              </div>
+            </Paper>
+          </Grid>
         </Grid>
       </Grid>
     </main>
