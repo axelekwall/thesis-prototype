@@ -8,6 +8,7 @@ import { drawerWidth } from '../config/themeConfig';
 import useData from '../hooks/useData';
 import Loading from './Loading';
 import Main from './Main';
+import SideBar from './SideBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const App: FC = () => {
   const classes = useStyles();
-  const { repo } = useData();
+  const { repo, items } = useData();
   return (
     <div className={classes.app}>
       <AppBar position="fixed" className={classes.appBar}>
@@ -53,6 +54,7 @@ const App: FC = () => {
         classes={{ paper: classes.drawerPaper }}
       >
         <Toolbar />
+        {items.length > 0 && <SideBar />}
       </Drawer>
       {repo.length > 0 ? <Main /> : <Loading />}
     </div>

@@ -7,6 +7,7 @@ import {
   createStyles,
   Grid,
   Paper,
+  Typography,
 } from '@material-ui/core';
 import Sunburst from './Sunburst';
 
@@ -18,7 +19,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       padding: theme.spacing(2),
-      height: '50vh',
+    },
+    chartWrapper: {
+      height: '60vh',
+    },
+    paperTitle: {
+      marginBottom: theme.spacing(1),
     },
   })
 );
@@ -29,14 +35,14 @@ const Main: FC = () => {
     <main className={classes.main}>
       <Toolbar />
       <Grid container justify="center" spacing={4}>
-        <Grid item xs={12} xl={6}>
+        <Grid item xs={12} xl={9}>
           <Paper className={classes.card}>
-            <TreeMap />
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.card}>
-            <Sunburst />
+            <Typography className={classes.paperTitle} variant="h6">
+              Project Overview
+            </Typography>
+            <div className={classes.chartWrapper}>
+              <TreeMap />
+            </div>
           </Paper>
         </Grid>
       </Grid>

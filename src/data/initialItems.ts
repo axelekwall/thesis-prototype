@@ -6,6 +6,8 @@ const items: Array<DebtItem> = [
     type: 'Code',
     description: 'Not good',
     deadline: new Date().toISOString(),
+    title: 'Test item',
+    id: '1',
   },
 ];
 

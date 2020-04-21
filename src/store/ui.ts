@@ -1,23 +1,26 @@
 import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit';
+import { DebtItem } from './data';
 
-const initialState = {
-  menuOpen: false,
+const initialState: UiState = {
+  focusedItem: null,
 };
 
-type UiState = typeof initialState;
+export interface UiState {
+  focusedItem: DebtItem | null;
+}
 
-const menuToggled: CaseReducer<UiState, PayloadAction<boolean>> = (
+const itemfocused: CaseReducer<UiState, PayloadAction<DebtItem | null>> = (
   state,
   { payload }
 ) => {
-  state.menuOpen = payload;
+  state.focusedItem = payload;
 };
 
 const ui = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    menuToggled,
+    itemfocused,
   },
 });
 

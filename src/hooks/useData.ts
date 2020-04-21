@@ -4,29 +4,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { actions, DataState } from '../store/data';
 import { State } from '../store';
-import { data } from '../data/repo';
+import { data as repoData } from '../data/repo';
 
 const url =
   'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/dc9a6de41436a40aaedad0204cd681965ba58df4?recursive=true';
 
-// const fetcher = (): Promise<Repo> => fetch(url).then((r) => r.json());
-const fetcher = (): Repo => data;
+const fetcher = (): Promise<Repo> => fetch(url).then((r) => r.json());
+// const fetcher = (): Repo => repoData;
 
 const options = {
   initialData: null,
 };
 
 const useData = (): DataState => {
-  const { data, error } = useSWR('repo', fetcher, options);
+  const { data: repoData, error } = useSWR('repo', fetcher, options);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (data) {
-      dispatch(actions.repoDataUpdated(getRepoData(data)));
+    if (repoData) {
+      const data = getRepoData(repoData);
+      dispatch(actions.repoDataUpdated(data));
     }
     if (error) {
       console.log(error);
     }
-  }, [data, error]);
+  }, [repoData, error]);
   return useSelector<State, DataState>((state) => state.data);
 };
 

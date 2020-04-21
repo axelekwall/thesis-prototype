@@ -31,7 +31,9 @@ const getFileNodeChildren = (
   };
 };
 
-export const getRepoData = (repo: Repo): Array<FileNode> => {
+export const getRepoData = (
+  repo: Repo
+): { data: Array<FileNode>; repoTree: Array<FileNode> } => {
   const repoTree = repo.tree
     .filter(
       (node) =>
@@ -46,5 +48,5 @@ export const getRepoData = (repo: Repo): Array<FileNode> => {
     })) as Array<FileNode>;
   let data = repoTree.filter((node) => node.level === 0);
   data = data.map((node) => getFileNodeChildren(repoTree, node));
-  return data;
+  return { data, repoTree };
 };
