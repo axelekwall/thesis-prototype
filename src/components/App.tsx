@@ -1,6 +1,5 @@
 import React, { FC, useCallback } from 'react';
 import Typography from '@material-ui/core/Typography';
-import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -8,7 +7,6 @@ import { drawerWidth } from '../config/themeConfig';
 import useData from '../hooks/useData';
 import Loading from './Loading';
 import Main from './Main';
-import SideBar from './SideBar';
 import { actions as uiActions } from '../store/ui';
 import { actions as dataActions } from '../store/data';
 import { actions as newItemActions } from '../store/newItem';
@@ -57,7 +55,10 @@ const App: FC = () => {
           <Typography onClick={reset} variant="h6" className={classes.title}>
             Tech Debt Tracker
           </Typography>
-          <Button onClick={() => dispatch(uiActions.toggleNewItem(true))}>
+          <Button
+            color="secondary"
+            onClick={() => dispatch(uiActions.toggleNewItem(true))}
+          >
             New Item
           </Button>
         </Toolbar>

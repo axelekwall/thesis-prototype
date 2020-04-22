@@ -23,7 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       padding: theme.spacing(2),
     },
-    title: {},
+    card: {
+      backgroundColor: theme.palette.primary.light,
+    },
   })
 );
 
@@ -63,6 +65,7 @@ const CardList: FC = () => {
           .map((item) => (
             <Grid key={item.id} item>
               <Card
+                className={classes.card}
                 onMouseEnter={(): void => {
                   dispatch(actions.itemfocused(item));
                 }}
