@@ -15,23 +15,6 @@ export const data = {
         'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/8cf0fa59717bb26571dc123fe1772c724869d1b9',
     },
     {
-      path: '.firebase',
-      mode: '040000',
-      type: 'tree',
-      sha: 'ad6962cf1944651a98456ba485061e617f7fad4b',
-      url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/ad6962cf1944651a98456ba485061e617f7fad4b',
-    },
-    {
-      path: '.firebase/hosting.ZGlzdA.cache',
-      mode: '100644',
-      type: 'blob',
-      sha: 'd8a907e7d045254256c29e0944fc164536d75d5c',
-      size: 185,
-      url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/d8a907e7d045254256c29e0944fc164536d75d5c',
-    },
-    {
       path: '.firebaserc',
       mode: '100644',
       type: 'blob',
