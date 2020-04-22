@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import TreeMap from './TreeMap';
+import Save from '@material-ui/icons/Save';
+import Close from '@material-ui/icons/Close';
+import Delete from '@material-ui/icons/Delete';
 import {
   makeStyles,
   Theme,
@@ -27,9 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     chartWrapper: {
       height: '60vh',
-    },
-    paperTitle: {
-      marginBottom: theme.spacing(1),
+      color: 'black',
     },
   })
 );
@@ -50,20 +51,21 @@ const Main: FC = () => {
           {newItem && (
             <Grid item>
               <Paper className={classes.card}>
-                <Grid container direction="column">
+                <Grid container direction="column" spacing={2}>
                   <Grid item container direction="row" justify="space-between">
                     <Grid item>
-                      <Typography className={classes.paperTitle} variant="h6">
-                        Create new item
-                      </Typography>
+                      <Typography variant="h6">Create new item</Typography>
                     </Grid>
                     <Grid item>
-                      <Button>Close</Button>
-                      <Button>Save</Button>
+                      <Button startIcon={<Close />}>Close</Button>
                     </Grid>
                   </Grid>
                   <Grid item>
                     <NewItem />
+                  </Grid>
+                  <Grid item>
+                    <Button startIcon={<Save />}>Save</Button>
+                    <Button startIcon={<Delete />}>Reset</Button>
                   </Grid>
                 </Grid>
               </Paper>
@@ -75,12 +77,10 @@ const Main: FC = () => {
                 <Grid container direction="column">
                   <Grid item container direction="row" justify="space-between">
                     <Grid item>
-                      <Typography className={classes.paperTitle} variant="h6">
-                        {selectedFile.path}
-                      </Typography>
+                      <Typography variant="h6">{selectedFile.path}</Typography>
                     </Grid>
                     <Grid item>
-                      <Button>Close</Button>
+                      <Button startIcon={<Close />}>Close</Button>
                     </Grid>
                   </Grid>
                   <Grid item direction="row"></Grid>
@@ -91,20 +91,22 @@ const Main: FC = () => {
           {selectedItem !== null && (
             <Grid item>
               <Paper className={classes.card}>
-                <Typography className={classes.paperTitle} variant="h6">
-                  {selectedItem.title}
-                </Typography>
+                <Typography variant="h6">{selectedItem.title}</Typography>
               </Paper>
             </Grid>
           )}
           <Grid item>
             <Paper className={classes.card}>
-              <Typography className={classes.paperTitle} variant="h6">
-                Project Overview
-              </Typography>
-              <div className={classes.chartWrapper}>
-                <TreeMap />
-              </div>
+              <Grid container direction="column" spacing={2}>
+                <Grid item>
+                  <Typography variant="h6">Project Overview</Typography>
+                </Grid>
+                <Grid item>
+                  <div className={classes.chartWrapper}>
+                    <TreeMap />
+                  </div>
+                </Grid>
+              </Grid>
             </Paper>
           </Grid>
         </Grid>

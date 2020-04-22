@@ -16,13 +16,15 @@ const TreeMap: FC = () => {
     (state) => state.ui.focusedItem
   );
   const getColorByType = useCallback(
-    (type: DebtTypes): string => {
+    (type: DebtTypes) => {
       switch (type) {
         case 'Code':
           return 'yellow';
         case 'Documentation':
           return 'green';
-        case 'Architecture':
+        case 'Architectural':
+          return 'orange';
+        default:
           return 'orange';
       }
     },
@@ -65,6 +67,7 @@ const TreeMap: FC = () => {
       innerPadding={0}
       outerPadding={10}
       borderWidth={2}
+      labelTextColor="black"
       borderColor={{ from: 'color', modifiers: [['darker', '0.3']] }}
       colors={matchColors}
       label={(node: FileNode): string => node.pathArray[node.level]}

@@ -1,46 +1,94 @@
-import React, { FC, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { State } from '../store';
-import { NewItemState, actions } from '../store/newItem';
-import { makeStyles, Theme, createStyles, TextField } from '@material-ui/core';
+import React, { FC } from 'react';
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  TextField,
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@material-ui/core';
+import useNewItem from '../hooks/useNewItem';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
+    formControl: {
+      width: '100%',
+    },
   })
 );
 
 const NewItem: FC = () => {
   const classes = useStyles();
-  const newItem = useSelector<State, NewItemState>((state) => state.newItem);
-  const dispatch = useDispatch();
-  const createOnUpdate = useCallback(
-    (key: keyof NewItemState) => (e: any): void => {
-      e.preventDefault();
-      dispatch(
-        actions.fieldUpdated({
-          ...newItem,
-          ...{ [key]: e.target.value },
-        })
-      );
-    },
-    [newItem]
-  );
+  const { newItem, createOnUpdate } = useNewItem();
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField
-        required
-        onChange={createOnUpdate('title')}
-        label="Title"
-        value={newItem.title}
-      />
-      <TextField
-        required
-        onChange={createOnUpdate('path')}
-        label="Path"
-        value={newItem.path}
-        variant="filled"
-      />
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <TextField
+            required
+            fullWidth
+            color="secondary"
+            onChange={createOnUpdate('title')}
+            label="Title"
+            value={newItem.title}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            fullWidth
+            onChange={createOnUpdate('path')}
+            label="Path"
+            value={newItem.path}
+            color="secondary"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            fullWidth
+            onChange={createOnUpdate('description')}
+            label="Description"
+            multiline
+            value={newItem.description}
+            color="secondary"
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <KeyboardDatePicker
+            disableToolbar
+            fullWidth
+            variant="inline"
+            format="MM/dd/yyyy"
+            label="Deadline"
+            color="secondary"
+            value={new Date(newItem.deadline)}
+            onChange={createOnUpdate('deadline')}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="type-select-label">Type</InputLabel>
+            <Select
+              labelId="type-select-label"
+              value={newItem.type}
+              color="secondary"
+              onChange={createOnUpdate('type')}
+            >
+              <MenuItem value="Documentation">Documentation</MenuItem>
+              <MenuItem value="Code">Code</MenuItem>
+              <MenuItem value="Architectural">Architectural</MenuItem>
+              <MenuItem value="Environmental">Environmental</MenuItem>
+              <MenuItem value="Testing">Testing</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
     </form>
   );
 };

@@ -83,7 +83,7 @@ const CardList: FC = () => {
                   <Typography variant="subtitle1">{item.title}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button>Edit</Button>
+                  <Button color="secondary">Edit</Button>
                 </CardActions>
               </Card>
             </Grid>

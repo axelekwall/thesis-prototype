@@ -21,7 +21,7 @@ const items: Array<DebtItem> = [
     priority: 2,
     estimate: 5,
     title: 'This file need documentation',
-    id: '2',
+    id: '22',
   },
   {
     path: '/',
@@ -32,7 +32,7 @@ const items: Array<DebtItem> = [
     priority: 2,
     estimate: 5,
     title: 'This file need documentation',
-    id: '3',
+    id: '333',
   },
 ];
 

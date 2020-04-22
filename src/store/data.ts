@@ -18,7 +18,7 @@ export interface DebtItem {
   completed?: number;
   priority: Priority;
   estimate: Estimate;
-  description?: string;
+  description: string;
   type: DebtTypes;
   id: string;
   title: string;
