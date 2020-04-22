@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,6 +9,11 @@ import useData from '../hooks/useData';
 import Loading from './Loading';
 import Main from './Main';
 import SideBar from './SideBar';
+import { actions as uiActions } from '../store/ui';
+import { actions as dataActions } from '../store/data';
+import { actions as newItemActions } from '../store/newItem';
+import { Button } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,24 +43,33 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const App: FC = () => {
   const classes = useStyles();
-  const { repo, items } = useData();
+  const dispatch = useDispatch();
+  const reset = useCallback(() => {
+    dispatch(uiActions.reset());
+    dispatch(newItemActions.reset());
+    dispatch(dataActions.reset());
+  }, [dispatch]);
+  const { repo } = useData();
   return (
     <div className={classes.app}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography onClick={reset} variant="h6" className={classes.title}>
             Tech Debt Tracker
           </Typography>
+          <Button onClick={() => dispatch(uiActions.toggleNewItem(true))}>
+            New Item
+          </Button>
         </Toolbar>
       </AppBar>
-      <Drawer
+      {/* <Drawer
         variant="permanent"
         className={classes.drawer}
         classes={{ paper: classes.drawerPaper }}
       >
         <Toolbar />
         {items.length > 0 && <SideBar />}
-      </Drawer>
+      </Drawer> */}
       {repo.length > 0 ? <Main /> : <Loading />}
     </div>
   );

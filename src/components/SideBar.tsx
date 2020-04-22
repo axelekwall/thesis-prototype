@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { State } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
-import { format, compareAsc } from 'date-fns';
+import { format } from 'date-fns';
 import { DebtItem } from '../store/data';
 import { actions } from '../store/ui';
 import { FileNode } from '../data';

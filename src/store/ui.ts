@@ -6,12 +6,14 @@ const initialState: UiState = {
   focusedItem: null,
   selectedFile: null,
   selectedItem: null,
+  newItem: false,
 };
 
 export interface UiState {
   focusedItem: DebtItem | null;
   selectedItem: DebtItem | null;
   selectedFile: FileNode | null;
+  newItem: boolean;
 }
 
 const itemfocused: CaseReducer<UiState, PayloadAction<DebtItem | null>> = (
@@ -19,6 +21,13 @@ const itemfocused: CaseReducer<UiState, PayloadAction<DebtItem | null>> = (
   { payload }
 ) => {
   state.focusedItem = payload;
+};
+
+const toggleNewItem: CaseReducer<UiState, PayloadAction<boolean>> = (
+  state,
+  { payload }
+) => {
+  state.newItem = payload;
 };
 
 const itemSelected: CaseReducer<UiState, PayloadAction<DebtItem | null>> = (
@@ -43,6 +52,8 @@ const ui = createSlice({
     itemfocused,
     fileSelected,
     itemSelected,
+    toggleNewItem,
+    reset: (): UiState => initialState,
   },
 });
 

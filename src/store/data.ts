@@ -12,7 +12,7 @@ export type Priority = 1 | 2 | 3;
 export type Estimate = 1 | 2 | 3 | 5 | 8;
 
 export interface DebtItem {
-  path?: string;
+  path: string;
   deadline: number;
   created: number;
   completed?: number;
@@ -55,6 +55,7 @@ const data = createSlice({
   initialState,
   reducers: {
     repoDataUpdated,
+    reset: (state): DataState => state,
   },
 });
 
