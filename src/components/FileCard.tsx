@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux';
 import Close from '@material-ui/icons/Close';
 import { FileNode } from '../data';
 import { State } from '../store';
-import * as leasot from 'leasot';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,10 +28,10 @@ const FileCard: FC = () => {
   );
   useEffect(() => {
     if (selectedFile !== null) {
-      fetch(selectedFile.url)
+      fetch(selectedFile.url as string)
         .then((res) => res.json())
         .then((data) => {
-          console.log(leasot.parse(atob(data.content), { extension: '.ts' }));
+          console.log(atob(data.content));
         });
     }
   }, [selectedFile]);

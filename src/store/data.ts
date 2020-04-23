@@ -35,7 +35,7 @@ const initialState: DataState = {
   repo: [],
   repoTree: [],
   items: initialItems,
-  levels: 1,
+  levels: 0,
 };
 
 const repoDataUpdated: CaseReducer<
@@ -43,7 +43,7 @@ const repoDataUpdated: CaseReducer<
   PayloadAction<{ data: Array<FileNode>; repoTree: Array<FileNode> }>
 > = (state, { payload }) => {
   state.levels = payload.repoTree.reduce(
-    (prev, { level }) => (prev > level + 1 ? prev : level + 1),
+    (prev, { level }) => (prev > level ? prev : level),
     1
   );
   state.repo = payload.data;

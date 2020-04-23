@@ -7,11 +7,9 @@ import { hierarchy, HierarchyRectangularNode } from 'd3-hierarchy';
 import { useSelector } from 'react-redux';
 import { State } from '../store';
 import { FileNode } from '../data';
-import { DataState, DebtItem, DebtTypes } from '../store/data';
+import { DataState, DebtItem } from '../store/data';
 import { useTheme } from '@material-ui/core/styles';
-
-const blue = '#0373d9';
-const green = '#00ff70';
+import { orange } from '@material-ui/core/colors';
 
 const PartitionTree: FC<{ width: number; height: number }> = ({
   width,
@@ -33,34 +31,19 @@ const PartitionTree: FC<{ width: number; height: number }> = ({
       children: repo,
     },
     (d) => d.children
-  ).sum((d) => (d.size ? 1 + d.size / 10 : 1));
+  ).sum((d) => (d.size ? Math.sqrt(d.size) : 1));
 
   const colorScale = useCallback(
-    scaleLinear({ domain: [0, 3], range: [blue, green] }),
+    scaleLinear({ domain: [0, levels], range: [orange['100'], orange['400']] }),
     []
-  );
-  const getColorByType = useCallback(
-    (type: DebtTypes) => {
-      switch (type) {
-        case 'Code':
-          return 'yellow';
-        case 'Documentation':
-          return 'green';
-        case 'Architectural':
-          return 'orange';
-        default:
-          return 'orange';
-      }
-    },
-    [items]
   );
   const matchColors = useCallback(
     (d: HierarchyRectangularNode<FileNode>): string => {
-      if (focusedItem?.path === d.data.path) return 'red';
-      const tmp = items.filter((item) => item.path === d.data.path);
-      if (tmp.length > 1) return 'blue';
-      if (tmp.length === 1) return getColorByType(tmp[0].type);
-      return colorScale(d.data.level);
+      if (focusedItem?.path === d.data.path)
+        return theme.palette.secondary.main;
+      const debtItemCount = items.filter((item) => item.path === d.data.path)
+        .length;
+      return colorScale(debtItemCount);
     },
     [focusedItem, items]
   );

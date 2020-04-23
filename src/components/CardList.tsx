@@ -53,7 +53,7 @@ const CardList: FC = () => {
             {selectedFile === null
               ? 'All debt items'
               : `Debt items for ${selectedFile.path}${
-                  selectedFile.type === 'tree' && selectedFile.level >= 0
+                  selectedFile.type === 'tree' && selectedFile.level >= 1
                     ? '/'
                     : ''
                 }`}

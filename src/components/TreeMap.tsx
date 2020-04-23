@@ -37,7 +37,7 @@ const TreeMap: FC = () => {
     [dispatch]
   );
   const getColorBasedOnLevel = useCallback(
-    (level: number): string => d3.schemeBlues[levels + 1][level + 1],
+    (level: number): string => d3.schemeBlues[levels][level],
     [levels]
   );
   const matchColors = useCallback(
@@ -55,7 +55,7 @@ const TreeMap: FC = () => {
       root={{
         path: '/',
         type: 'tree',
-        level: -1,
+        level: 0,
         children: repo,
       }}
       identity="path"
@@ -70,7 +70,7 @@ const TreeMap: FC = () => {
       labelTextColor="black"
       borderColor={{ from: 'color', modifiers: [['darker', '0.3']] }}
       colors={matchColors}
-      label={(node: FileNode): string => node.pathArray[node.level]}
+      label={(node: FileNode): string => node.pathArray[node.level - 1]}
       onClick={itemClicked}
     />
   );

@@ -21,7 +21,7 @@ const getFileNodeChildren = (
   const children = tree
     .filter(
       (leaf) =>
-        leaf.pathArray[node.level] === node.pathArray[node.level] &&
+        leaf.pathArray[node.level - 1] === node.pathArray[node.level - 1] &&
         leaf.level === node.level + 1
     )
     .map((leaf) => getFileNodeChildren(tree, leaf));
@@ -44,9 +44,9 @@ export const getRepoData = (
     .map((node) => ({
       ...node,
       pathArray: node.path.split('/'),
-      level: node.path.split('/').length - 1,
+      level: node.path.split('/').length,
     })) as Array<FileNode>;
-  let data = repoTree.filter((node) => node.level === 0);
+  let data = repoTree.filter((node) => node.level === 1);
   data = data.map((node) => getFileNodeChildren(repoTree, node));
   return { data, repoTree };
 };

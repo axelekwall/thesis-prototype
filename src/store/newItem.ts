@@ -7,6 +7,7 @@ const initialState: NewItemState = {
   created: 0,
   priority: 1,
   estimate: 1,
+  description: '',
   id: '1',
   title: '',
   type: 'Architectural',

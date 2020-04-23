@@ -57,7 +57,9 @@ const App: FC = () => {
           </Typography>
           <Button
             color="secondary"
-            onClick={() => dispatch(uiActions.toggleNewItem(true))}
+            onClick={(): void => {
+              dispatch(uiActions.toggleNewItem(true));
+            }}
           >
             New Item
           </Button>
