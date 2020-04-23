@@ -8,8 +8,8 @@ export interface FileNode {
   path: string;
   pathArray: Array<string>;
   level: number;
-  url: string;
-  sha: string;
+  url?: string;
+  sha?: string;
   size?: number;
 }
 

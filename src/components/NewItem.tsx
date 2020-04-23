@@ -9,6 +9,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Typography,
+  Slider,
 } from '@material-ui/core';
 import useNewItem from '../hooks/useNewItem';
 import { KeyboardDatePicker } from '@material-ui/pickers';
@@ -18,6 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {},
     formControl: {
       width: '100%',
+    },
+    slider: {
+      // width: '80%',
+      // marginLeft: theme.spacing(1),
+      // marginRight: theme.spacing(1),
     },
   })
 );
@@ -87,6 +94,42 @@ const NewItem: FC = () => {
               <MenuItem value="Testing">Testing</MenuItem>
             </Select>
           </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography id="priority-slider" gutterBottom>
+            Priority
+          </Typography>
+          <Slider
+            defaultValue={1}
+            className={classes.slider}
+            aria-labelledby="priority-slider"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            color="secondary"
+            onChange={createOnUpdate('priority')}
+            value={newItem.priority}
+            min={1}
+            max={3}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <Typography id="estimate-slider" gutterBottom>
+            Estimate
+          </Typography>
+          <Slider
+            className={classes.slider}
+            defaultValue={1}
+            aria-labelledby="estimate-slider"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            color="secondary"
+            onChange={createOnUpdate('estimate')}
+            value={newItem.estimate}
+            min={1}
+            max={5}
+          />
         </Grid>
       </Grid>
     </form>

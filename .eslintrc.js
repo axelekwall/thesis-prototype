@@ -31,6 +31,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'react/prop-types': 'off',
     // '@typescript-eslint/explicit-function-return-type': [
     //   'warn',
     //   {

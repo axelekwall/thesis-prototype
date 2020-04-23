@@ -11,6 +11,10 @@ const url =
 const getRepoUrl =
   'https://api.github.com/repos/axelekwall/thesis-prototype/commits';
 
+// TODO: Hello this is a comment /Testing
+
+// FIXME: This is a ref /Code
+
 // const fetcher = (): Promise<Repo> =>
 //   fetch(getRepoUrl)
 //     .then((r) => r.json())

@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
-import TreeMap from './TreeMap';
 import Save from '@material-ui/icons/Save';
 import Close from '@material-ui/icons/Close';
 import Delete from '@material-ui/icons/Delete';
@@ -18,6 +17,8 @@ import { State } from '../store';
 import CardList from './CardList';
 import { UiState } from '../store/ui';
 import NewItem from './NewItem';
+import FileCard from './FileCard';
+import TreeGraph from './TreeGraph';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Main: FC = () => {
   const classes = useStyles();
-  const { selectedFile, selectedItem, newItem } = useSelector<State, UiState>(
+  const { selectedItem, newItem } = useSelector<State, UiState>(
     (state) => state.ui
   );
   return (
@@ -71,23 +72,7 @@ const Main: FC = () => {
               </Paper>
             </Grid>
           )}
-          {selectedFile !== null && (
-            <Grid item>
-              <Paper className={classes.card}>
-                <Grid container direction="column">
-                  <Grid item container direction="row" justify="space-between">
-                    <Grid item>
-                      <Typography variant="h6">{selectedFile.path}</Typography>
-                    </Grid>
-                    <Grid item>
-                      <Button startIcon={<Close />}>Close</Button>
-                    </Grid>
-                  </Grid>
-                  <Grid item direction="row"></Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-          )}
+          <FileCard />
           {selectedItem !== null && (
             <Grid item>
               <Paper className={classes.card}>
@@ -103,7 +88,7 @@ const Main: FC = () => {
                 </Grid>
                 <Grid item>
                   <div className={classes.chartWrapper}>
-                    <TreeMap />
+                    <TreeGraph />
                   </div>
                 </Grid>
               </Grid>

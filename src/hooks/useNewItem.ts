@@ -8,10 +8,13 @@ const useNewItem = () => {
   const newItem = useSelector<State, NewItemState>((state) => state.newItem);
   const dispatch = useDispatch();
   const createOnUpdate = useCallback(
-    (key: keyof NewItemState) => (e: any): void => {
+    (key: keyof NewItemState) => (e: any, sliderValue?: any): void => {
       let value;
       if (['deadline', 'created', 'completed'].includes(key)) {
         value = e.valueOf();
+      } else if (['priority', 'estimate'].includes(key)) {
+        e.preventDefault();
+        value = sliderValue;
       } else {
         e.preventDefault();
         value = e.target.value;
