@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useCallback } from 'react';
+import React, { FC, ReactNode, useCallback, useMemo } from 'react';
 import { Group } from '@vx/group';
 import { Partition } from '@vx/hierarchy';
 import { ParentSize } from '@vx/responsive';
@@ -7,21 +7,26 @@ import { hierarchy, HierarchyRectangularNode } from 'd3-hierarchy';
 import { useSelector } from 'react-redux';
 import { State } from '../store';
 import { FileNode } from '../data';
-import { DataState, DebtItem } from '../store/data';
+import { DataState } from '../store/data';
 import { useTheme } from '@material-ui/core/styles';
 import { orange } from '@material-ui/core/colors';
+import { useItemInteraction, useFileInteraction } from '../hooks/interactions';
 
 const PartitionTree: FC<{ width: number; height: number }> = ({
   width,
   height,
 }) => {
-  const { repo, items, levels } = useSelector<State, DataState>(
+  const { repo, items, repoTree } = useSelector<State, DataState>(
     (state) => state.data
   );
+  const {
+    setFocusedFile,
+    setSelectedFile,
+    selectedFile,
+    focusedFile,
+  } = useFileInteraction();
   const theme = useTheme();
-  const focusedItem = useSelector<State, DebtItem | null>(
-    (state) => state.ui.focusedItem
-  );
+  const { focusedItem } = useItemInteraction();
   const data = hierarchy<FileNode>(
     {
       path: '/',
@@ -32,20 +37,35 @@ const PartitionTree: FC<{ width: number; height: number }> = ({
     },
     (d) => d.children
   ).sum((d) => (d.size ? Math.sqrt(d.size) : 1));
-
+  const maxItems = useMemo(() => {
+    let max = 0;
+    repoTree.forEach((fileNode) => {
+      const num = items.filter((item) => item.path === fileNode.path).length;
+      if (num > max) {
+        max = num;
+      }
+    });
+    return max;
+  }, [items, repo]);
   const colorScale = useCallback(
-    scaleLinear({ domain: [0, levels], range: [orange['100'], orange['400']] }),
-    []
+    scaleLinear({
+      domain: [0, maxItems],
+      range: [orange['100'], orange['400']],
+    }),
+    [maxItems]
   );
   const matchColors = useCallback(
     (d: HierarchyRectangularNode<FileNode>): string => {
-      if (focusedItem?.path === d.data.path)
+      if (
+        focusedItem?.path === d.data.path ||
+        focusedFile?.path === d.data.path
+      )
         return theme.palette.secondary.main;
       const debtItemCount = items.filter((item) => item.path === d.data.path)
         .length;
       return colorScale(debtItemCount);
     },
-    [focusedItem, items]
+    [focusedItem, items, focusedFile]
   );
   return (
     <svg width={width} height={height}>
@@ -57,6 +77,15 @@ const PartitionTree: FC<{ width: number; height: number }> = ({
             return (
               <Group key={node.data.path} top={node.y0} left={node.x0}>
                 <rect
+                  onClick={(): void => {
+                    setSelectedFile(selectedFile ? null : node.data);
+                  }}
+                  onMouseEnter={(): void => {
+                    setFocusedFile(node.data);
+                  }}
+                  onMouseLeave={(): void => {
+                    setFocusedFile(null);
+                  }}
                   height={height}
                   width={width}
                   fill={matchColors(node)}
