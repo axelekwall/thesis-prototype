@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import {
   makeStyles,
-  Theme,
   createStyles,
   TextField,
   Grid,
@@ -12,26 +11,26 @@ import {
   Typography,
   Slider,
 } from '@material-ui/core';
-import useNewItem from '../hooks/useNewItem';
+import useItemState from '../hooks/useItemState';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {},
     formControl: {
       width: '100%',
     },
-    slider: {
-      // width: '80%',
-      // marginLeft: theme.spacing(1),
-      // marginRight: theme.spacing(1),
-    },
   })
 );
 
-const NewItem: FC = () => {
+interface Props {
+  stateKey: 'newItem' | 'editItem';
+  action: any;
+}
+
+const ItemForm: FC<Props> = ({ stateKey, action }) => {
   const classes = useStyles();
-  const { newItem, createOnUpdate } = useNewItem();
+  const { newItem, createOnUpdate } = useItemState(stateKey, action);
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <Grid container spacing={2}>
@@ -101,7 +100,6 @@ const NewItem: FC = () => {
           </Typography>
           <Slider
             defaultValue={1}
-            className={classes.slider}
             aria-labelledby="priority-slider"
             valueLabelDisplay="auto"
             step={1}
@@ -118,7 +116,6 @@ const NewItem: FC = () => {
             Estimate
           </Typography>
           <Slider
-            className={classes.slider}
             defaultValue={1}
             aria-labelledby="estimate-slider"
             valueLabelDisplay="auto"
@@ -136,4 +133,4 @@ const NewItem: FC = () => {
   );
 };
 
-export default NewItem;
+export default ItemForm;

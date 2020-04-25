@@ -1,14 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../store';
-import { NewItemState } from '../store/newItem';
 import { useCallback } from 'react';
-import { actions } from '../store/newItem';
+import { DebtItem } from '../store/data';
 
-const useNewItem = () => {
-  const newItem = useSelector<State, NewItemState>((state) => state.newItem);
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const useItemState = (key: 'newItem' | 'editItem', action: any) => {
+  const newItem = useSelector<State, DebtItem>((state) => state[key]);
   const dispatch = useDispatch();
   const createOnUpdate = useCallback(
-    (key: keyof NewItemState) => (e: any, sliderValue?: any): void => {
+    (key: keyof DebtItem) => (e: any, sliderValue?: any): void => {
       let value;
       if (['deadline', 'created', 'completed'].includes(key)) {
         value = e.valueOf();
@@ -20,7 +20,7 @@ const useNewItem = () => {
         value = e.target.value;
       }
       dispatch(
-        actions.fieldUpdated({
+        action({
           ...newItem,
           ...{ [key]: value },
         })
@@ -31,4 +31,4 @@ const useNewItem = () => {
   return { newItem, createOnUpdate };
 };
 
-export default useNewItem;
+export default useItemState;

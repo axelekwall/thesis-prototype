@@ -55,14 +55,14 @@ const App: FC = () => {
           <Typography onClick={reset} variant="h6" className={classes.title}>
             Tech Debt Tracker
           </Typography>
-          <Button
+          {/* <Button
             color="secondary"
             onClick={(): void => {
               dispatch(uiActions.toggleNewItem(true));
             }}
           >
             New Item
-          </Button>
+          </Button> */}
         </Toolbar>
       </AppBar>
       {/* <Drawer

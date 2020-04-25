@@ -1,8 +1,9 @@
 import React, { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../store';
-import { DebtItem } from '../store/data';
-import { actions } from '../store/ui';
+import { DebtItem, actions as dataActions } from '../store/data';
+import { actions as uiActions } from '../store/ui';
+import { actions as newItemActions } from '../store/newItem';
 import { FileNode } from '../data';
 import {
   Paper,
@@ -38,6 +39,7 @@ const CardList: FC = () => {
   const selectedFile = useSelector<State, FileNode | null>(
     (state) => state.ui.selectedFile
   );
+  const newItem = useSelector<State, DebtItem>((state) => state.newItem);
   const filterItems = useCallback(
     (item: DebtItem) => {
       if (selectedFile === null) return true;
@@ -67,13 +69,13 @@ const CardList: FC = () => {
               <Card
                 className={classes.card}
                 onMouseEnter={(): void => {
-                  dispatch(actions.itemfocused(item));
+                  dispatch(uiActions.itemfocused(item));
                 }}
                 onMouseLeave={(): void => {
-                  dispatch(actions.itemfocused(null));
+                  dispatch(uiActions.itemfocused(null));
                 }}
                 onClick={(): void => {
-                  dispatch(actions.itemSelected(item));
+                  dispatch(uiActions.itemSelected(item));
                 }}
               >
                 <CardContent>
@@ -84,10 +86,36 @@ const CardList: FC = () => {
                 </CardContent>
                 <CardActions>
                   <Button color="secondary">Edit</Button>
+                  <Button
+                    onClick={(): void => {
+                      dispatch(dataActions.deleteItem(item.id));
+                      dispatch(uiActions.itemfocused(null));
+                    }}
+                    color="secondary"
+                  >
+                    Delete
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>
           ))}
+        <Grid item>
+          <Button
+            onClick={(): void => {
+              dispatch(
+                newItemActions.fieldUpdated({
+                  ...newItem,
+                  path: selectedFile?.path ?? '/',
+                })
+              );
+              dispatch(uiActions.toggleNewItem(true));
+            }}
+            color="secondary"
+            fullWidth
+          >
+            New Item
+          </Button>
+        </Grid>
       </Grid>
     </Paper>
   );

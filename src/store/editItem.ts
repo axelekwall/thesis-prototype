@@ -20,8 +20,8 @@ const fieldUpdated: CaseReducer<DebtItem, PayloadAction<DebtItem>> = (
   return payload;
 };
 
-const ui = createSlice({
-  name: 'newItem',
+const editItem = createSlice({
+  name: 'editItem',
   initialState,
   reducers: {
     fieldUpdated,
@@ -29,6 +29,6 @@ const ui = createSlice({
   },
 });
 
-export const { actions, reducer } = ui;
+export const { actions, reducer } = editItem;
 
-export default ui.reducer;
+export default editItem.reducer;

@@ -50,12 +50,38 @@ const repoDataUpdated: CaseReducer<
   state.repoTree = payload.repoTree;
 };
 
+const addItem: CaseReducer<DataState, PayloadAction<DebtItem>> = (
+  state,
+  { payload }
+) => {
+  state.items.push(payload);
+};
+
+const updateItem: CaseReducer<DataState, PayloadAction<DebtItem>> = (
+  state,
+  { payload }
+) => {
+  state.items = state.items.map((item) =>
+    item.id === payload.id ? payload : item
+  );
+};
+
+const deleteItem: CaseReducer<DataState, PayloadAction<string>> = (
+  state,
+  { payload }
+) => {
+  state.items = state.items.filter((item) => item.id !== payload);
+};
+
 const data = createSlice({
   name: 'data',
   initialState,
   reducers: {
     repoDataUpdated,
-    reset: (state): DataState => state,
+    updateItem,
+    addItem,
+    reset: (): DataState => initialState,
+    deleteItem,
   },
 });
 

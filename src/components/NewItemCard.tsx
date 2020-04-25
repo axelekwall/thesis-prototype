@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
+import { v4 as uuid } from 'uuid';
 import {
   Grid,
   Paper,
@@ -8,13 +9,15 @@ import {
   makeStyles,
   Theme,
 } from '@material-ui/core';
-import NewItem from './NewItem';
+import ItemForm from './ItemForm';
 import Save from '@material-ui/icons/Save';
 import Close from '@material-ui/icons/Close';
 import Delete from '@material-ui/icons/Delete';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../store';
-import { actions } from '../store/ui';
+import { actions as uiActions } from '../store/ui';
+import { actions as newItemActions } from '../store/newItem';
+import { actions as dataActions, DebtItem } from '../store/data';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,8 +29,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const NewItemCard: FC = () => {
   const newItem = useSelector<State, boolean>((state) => state.ui.newItem);
+  const newItemObj = useSelector<State, DebtItem>((state) => state.newItem);
   const dispatch = useDispatch();
   const classes = useStyles();
+  const saveItem = useCallback((): void => {
+    dispatch(
+      dataActions.addItem({
+        ...newItemObj,
+        id: uuid(),
+        created: new Date().valueOf(),
+      })
+    );
+    dispatch(newItemActions.reset());
+    dispatch(uiActions.toggleNewItem(false));
+  }, [newItemObj, newItemActions, uiActions, dataActions]);
   return newItem ? (
     <Grid item>
       <Paper className={classes.card}>
@@ -39,7 +54,7 @@ const NewItemCard: FC = () => {
             <Grid item>
               <Button
                 onClick={(): void => {
-                  dispatch(actions.toggleNewItem(false));
+                  dispatch(uiActions.toggleNewItem(false));
                 }}
                 startIcon={<Close />}
               >
@@ -48,11 +63,20 @@ const NewItemCard: FC = () => {
             </Grid>
           </Grid>
           <Grid item>
-            <NewItem />
+            <ItemForm stateKey="newItem" action={newItemActions.fieldUpdated} />
           </Grid>
           <Grid item>
-            <Button startIcon={<Save />}>Save</Button>
-            <Button startIcon={<Delete />}>Reset</Button>
+            <Button onClick={saveItem} startIcon={<Save />}>
+              Save
+            </Button>
+            <Button
+              onClick={(): void => {
+                dispatch(newItemActions.reset());
+              }}
+              startIcon={<Delete />}
+            >
+              Reset
+            </Button>
           </Grid>
         </Grid>
       </Paper>

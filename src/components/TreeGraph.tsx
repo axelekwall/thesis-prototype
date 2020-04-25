@@ -39,12 +39,19 @@ const PartitionTree: FC<{ width: number; height: number }> = ({
   ).sum((d) => (d.size ? Math.sqrt(d.size) : 1));
   const maxItems = useMemo(() => {
     let max = 0;
-    repoTree.forEach((fileNode) => {
-      const num = items.filter((item) => item.path === fileNode.path).length;
-      if (num > max) {
-        max = num;
-      }
-    });
+    repoTree.forEach(
+      (fileNode) => {
+        const num = items.filter((item) => item.path === fileNode.path).length;
+        if (num > max) {
+          max = num;
+        }
+      },
+      [repoTree, items]
+    );
+    const rootNum = items.filter((item) => item.path === '/').length;
+    if (rootNum > max) {
+      max = rootNum;
+    }
     return max;
   }, [items, repo]);
   const colorScale = useCallback(
@@ -66,7 +73,7 @@ const PartitionTree: FC<{ width: number; height: number }> = ({
         .length;
       return colorScale(debtItemCount);
     },
-    [focusedItem, items, focusedFile]
+    [focusedItem, items, focusedFile, selectedFile]
   );
   return (
     <svg width={width} height={height}>

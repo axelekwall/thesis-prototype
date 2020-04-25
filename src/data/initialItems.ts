@@ -1,4 +1,5 @@
 import { DebtItem } from '../store/data';
+import { v4 as uuid } from 'uuid';
 
 const items: Array<DebtItem> = [
   {
@@ -10,7 +11,7 @@ const items: Array<DebtItem> = [
     priority: 1,
     estimate: 3,
     title: 'This file need documentation',
-    id: '1',
+    id: uuid(),
   },
   {
     path: '/',
@@ -21,7 +22,7 @@ const items: Array<DebtItem> = [
     priority: 2,
     estimate: 5,
     title: 'This file need documentation',
-    id: '22',
+    id: uuid(),
   },
   {
     path: '/',
@@ -32,7 +33,7 @@ const items: Array<DebtItem> = [
     priority: 2,
     estimate: 5,
     title: 'This file need documentation',
-    id: '333',
+    id: uuid(),
   },
 ];
 

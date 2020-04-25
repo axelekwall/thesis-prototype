@@ -7,10 +7,8 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
 } from '@material-ui/core';
 import CardList from './CardList';
-import NewItem from './NewItem';
 import FileCard from './FileCard';
 import TreeGraph from './TreeGraph';
 import ItemCard from './ItemCard';
@@ -29,6 +27,12 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '60vh',
       color: 'black',
     },
+    column: {
+      overflowY: 'scroll',
+      flexWrap: 'nowrap',
+      overflowX: 'hidden',
+      maxHeight: '97vh',
+    },
   })
 );
 
@@ -36,12 +40,26 @@ const Main: FC = () => {
   const classes = useStyles();
   return (
     <main className={classes.main}>
-      <Toolbar />
       <Grid container justify="center" spacing={2}>
-        <Grid item container xs={3} direction="column">
+        <Grid
+          className={classes.column}
+          item
+          container
+          xs={3}
+          direction="column"
+        >
+          <Toolbar />
           <CardList />
         </Grid>
-        <Grid item container xs={9} direction="column" spacing={2}>
+        <Grid
+          className={classes.column}
+          item
+          container
+          xs={9}
+          direction="column"
+          spacing={2}
+        >
+          <Toolbar />
           <NewItemCard />
           <FileCard />
           <ItemCard />
