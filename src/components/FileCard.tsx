@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import Close from '@material-ui/icons/Close';
 import { FileNode } from '../data';
 import { State } from '../store';
+import { useFileInteraction } from '../hooks/interactions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,9 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const FileCard: FC = () => {
   const classes = useStyles();
-  const selectedFile = useSelector<State, FileNode | null>(
-    (state) => state.ui.selectedFile
-  );
+  const { selectedFile, setSelectedFile } = useFileInteraction();
   useEffect(() => {
     if (selectedFile !== null) {
       fetch(selectedFile.url as string)
@@ -44,7 +43,14 @@ const FileCard: FC = () => {
               <Typography variant="h6">{selectedFile.path}</Typography>
             </Grid>
             <Grid item>
-              <Button startIcon={<Close />}>Close</Button>
+              <Button
+                onClick={(): void => {
+                  setSelectedFile(null);
+                }}
+                startIcon={<Close />}
+              >
+                Close
+              </Button>
             </Grid>
           </Grid>
           <Grid item container direction="row"></Grid>

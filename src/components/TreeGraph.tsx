@@ -9,7 +9,7 @@ import { State } from '../store';
 import { FileNode } from '../data';
 import { DataState } from '../store/data';
 import { useTheme } from '@material-ui/core/styles';
-import { orange } from '@material-ui/core/colors';
+import { orange, yellow } from '@material-ui/core/colors';
 import { useItemInteraction, useFileInteraction } from '../hooks/interactions';
 
 const PartitionTree: FC<{ width: number; height: number }> = ({
@@ -58,9 +58,10 @@ const PartitionTree: FC<{ width: number; height: number }> = ({
     (d: HierarchyRectangularNode<FileNode>): string => {
       if (
         focusedItem?.path === d.data.path ||
-        focusedFile?.path === d.data.path
+        focusedFile?.path === d.data.path ||
+        selectedFile?.path === d.data.path
       )
-        return theme.palette.secondary.main;
+        return yellow['300'];
       const debtItemCount = items.filter((item) => item.path === d.data.path)
         .length;
       return colorScale(debtItemCount);
