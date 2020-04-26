@@ -80,7 +80,7 @@ const data = createSlice({
     repoDataUpdated,
     updateItem,
     addItem,
-    reset: (): DataState => initialState,
+    reset: (state): DataState => state,
     deleteItem,
   },
 });

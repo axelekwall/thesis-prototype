@@ -3,7 +3,7 @@ import { DebtItem } from './data';
 
 const initialState: DebtItem = {
   path: '/',
-  deadline: 0,
+  deadline: new Date().valueOf(),
   created: 0,
   priority: 1,
   estimate: 1,

@@ -43,7 +43,7 @@ const CardList: FC = () => {
   const filterItems = useCallback(
     (item: DebtItem) => {
       if (selectedFile === null) return true;
-      return item.path?.includes(selectedFile.path);
+      return item.path === selectedFile.path;
     },
     [selectedFile]
   );

@@ -13,6 +13,13 @@ import FileCard from './FileCard';
 import TreeGraph from './TreeGraph';
 import ItemCard from './ItemCard';
 import NewItemCard from './NewItemCard';
+import PieGraph from './PieGraph';
+import { LegendOrdinal, LegendLinear } from '@vx/legend';
+import StackedBarGraph from './StackedBarGraph';
+import { scaleOrdinal, scaleLinear } from '@vx/scale';
+import { green, red, orange } from '@material-ui/core/colors';
+import { DebtTypes } from '../store/data';
+import typeColor from '../helpers/typeColor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,8 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
     },
     chartWrapper: {
-      height: '60vh',
-      color: 'black',
+      position: 'relative',
+      height: '30vw',
+    },
+    pieWrapper: {
+      position: 'relative',
+      height: '20vw',
     },
     column: {
       overflowY: 'scroll',
@@ -35,6 +46,24 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+const barColor = scaleOrdinal({
+  domain: ['completed', 'due'],
+  range: [green['400'], red['400']],
+});
+
+const types: Array<DebtTypes> = [
+  'Architectural',
+  'Code',
+  'Documentation',
+  'Environmental',
+  'Testing',
+];
+
+const pieColor = scaleOrdinal({
+  domain: types,
+  range: types.map((type) => typeColor(type)),
+});
 
 const Main: FC = () => {
   const classes = useStyles();
@@ -74,8 +103,53 @@ const Main: FC = () => {
                     <TreeGraph />
                   </div>
                 </Grid>
+                <Grid item>
+                  <LegendLinear
+                    direction="row"
+                    scale={scaleLinear({
+                      domain: [0, 10],
+                      range: [orange['100'], orange['400']],
+                    })}
+                  ></LegendLinear>
+                </Grid>
               </Grid>
             </Paper>
+          </Grid>
+          <Grid item container direction="row" spacing={2}>
+            <Grid item xs={4}>
+              <Paper className={classes.card}>
+                <Grid container direction="column" spacing={2}>
+                  <Grid item>
+                    <Typography variant="h6">Debt Type Overview</Typography>
+                  </Grid>
+                  <Grid item>
+                    <div className={classes.pieWrapper}>
+                      <PieGraph />
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <LegendOrdinal scale={pieColor}></LegendOrdinal>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
+            <Grid item xs={8}>
+              <Paper className={classes.card}>
+                <Grid container direction="column" spacing={2}>
+                  <Grid item>
+                    <Typography variant="h6">Past and upcoming debt</Typography>
+                  </Grid>
+                  <Grid item>
+                    <div className={classes.pieWrapper}>
+                      <StackedBarGraph />
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <LegendOrdinal scale={barColor}></LegendOrdinal>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
