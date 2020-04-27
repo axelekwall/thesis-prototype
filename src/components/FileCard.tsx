@@ -13,6 +13,7 @@ import Close from '@material-ui/icons/Close';
 import { FileNode } from '../data';
 import { State } from '../store';
 import { useFileInteraction } from '../hooks/interactions';
+import useSWR from 'swr';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,18 +23,27 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const options = {
+  initialData: null,
+};
+
 const FileCard: FC = () => {
   const classes = useStyles();
   const { selectedFile, setSelectedFile } = useFileInteraction();
-  useEffect(() => {
-    if (selectedFile !== null) {
-      fetch(selectedFile.url as string)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(atob(data.content));
-        });
-    }
-  }, [selectedFile]);
+  // const { data, error } = useSWR(
+  //   selectedFile?.url ?? null,
+  //   (url) => fetch(url).then((res) => res.json()),
+  //   options
+  // );
+  // useEffect(() => {
+  //   if (selectedFile !== null) {
+  //     fetch(selectedFile.url as string)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log(atob(data.content));
+  //       });
+  //   }
+  // }, [selectedFile]);
   return selectedFile !== null ? (
     <Grid item>
       <Paper className={classes.card}>
@@ -53,7 +63,13 @@ const FileCard: FC = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid item container direction="row"></Grid>
+          <Grid item container direction="row">
+            {/* {data && (
+              <pre>
+                <code>{atob(data.content)}</code>
+              </pre>
+            )} */}
+          </Grid>
         </Grid>
       </Paper>
     </Grid>

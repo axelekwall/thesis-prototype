@@ -140,7 +140,7 @@ const StackedBars = withTooltip<{ width: number; height: number }, any>(
                             hideTooltip();
                           }, 300);
                         }}
-                        onMouseMove={(): void => {
+                        onMouseEnter={(): void => {
                           if (tooltipTimeout) clearTimeout(tooltipTimeout);
                           const top = (bar.height + bar.y) / 2;
                           const left = bar.x + bar.width;
@@ -190,10 +190,10 @@ const StackedBars = withTooltip<{ width: number; height: number }, any>(
               color: 'white',
             }}
           >
-            <div style={{ color: 'white' }}>
+            <div style={{ color: 'white', textTransform: 'capitalize' }}>
               <strong>{tooltipData.key}</strong>
             </div>
-            <div>{tooltipData.bar.data[tooltipData.key]}</div>
+            <div>Estimate: {tooltipData.bar.data[tooltipData.key]}</div>
           </TooltipWithBounds>
         )}
       </>
