@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import {
   makeStyles,
@@ -18,8 +18,10 @@ import { LegendOrdinal, LegendLinear } from '@vx/legend';
 import StackedBarGraph from './StackedBarGraph';
 import { scaleOrdinal, scaleLinear } from '@vx/scale';
 import { green, red, orange } from '@material-ui/core/colors';
-import { DebtTypes } from '../store/data';
+import { DebtTypes, DataState } from '../store/data';
 import typeColor from '../helpers/typeColor';
+import { useSelector } from 'react-redux';
+import { State } from '../store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,6 +68,23 @@ const pieColor = scaleOrdinal({
 });
 
 const Main: FC = () => {
+  const { items, repoTree } = useSelector<State, DataState>(
+    (state) => state.data
+  );
+  const maxItems = useMemo(() => {
+    let max = 0;
+    repoTree.forEach((fileNode) => {
+      const num = items.filter((item) => item.path === fileNode.path).length;
+      if (num > max) {
+        max = num;
+      }
+    });
+    const rootNum = items.filter((item) => item.path === '/').length;
+    if (rootNum > max) {
+      max = rootNum;
+    }
+    return max;
+  }, [items, repoTree]);
   const classes = useStyles();
   return (
     <main className={classes.main}>
@@ -107,7 +126,7 @@ const Main: FC = () => {
                   <LegendLinear
                     direction="row"
                     scale={scaleLinear({
-                      domain: [0, 10],
+                      domain: [0, maxItems],
                       range: [orange['100'], orange['400']],
                     })}
                   ></LegendLinear>

@@ -4,6 +4,7 @@ import { State } from '../store';
 import { DebtItem, actions as dataActions } from '../store/data';
 import { actions as uiActions } from '../store/ui';
 import { actions as newItemActions } from '../store/newItem';
+import { actions as editItemActions } from '../store/editItem';
 import { FileNode } from '../data';
 import {
   Paper,
@@ -18,6 +19,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { format } from 'date-fns';
+import typeColor from '../helpers/typeColor';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,8 +44,8 @@ const CardList: FC = () => {
   const newItem = useSelector<State, DebtItem>((state) => state.newItem);
   const filterItems = useCallback(
     (item: DebtItem) => {
-      if (selectedFile === null) return true;
-      return item.path === selectedFile.path;
+      if (selectedFile === null) return item.completed === undefined;
+      return item.path === selectedFile.path && item.completed === undefined;
     },
     [selectedFile]
   );
@@ -53,7 +55,7 @@ const CardList: FC = () => {
         <Grid item>
           <Typography variant="h6">
             {selectedFile === null
-              ? 'All debt items'
+              ? 'Debt items due soon'
               : `Debt items for ${selectedFile.path}${
                   selectedFile.type === 'tree' && selectedFile.level >= 1
                     ? '/'
@@ -74,27 +76,74 @@ const CardList: FC = () => {
                 onMouseLeave={(): void => {
                   dispatch(uiActions.itemfocused(null));
                 }}
-                onClick={(): void => {
-                  dispatch(uiActions.itemSelected(item));
-                }}
               >
                 <CardContent>
-                  <Typography color="textSecondary">
-                    {format(new Date(item.deadline), 'PPP')}
-                  </Typography>
-                  <Typography variant="subtitle1">{item.title}</Typography>
+                  <Grid
+                    container
+                    justify="space-between"
+                    alignItems="center"
+                    direction="row"
+                  >
+                    <Grid item>
+                      {' '}
+                      <Typography color="textSecondary">
+                        {format(new Date(item.deadline), 'PPP')}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <div
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          borderRadius: '999px',
+                          backgroundColor: typeColor(item.type),
+                        }}
+                      ></div>
+                    </Grid>
+                  </Grid>
+
+                  <Typography variant="h6">{item.title}</Typography>
+                  <Typography variant="body2">{item.description}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button color="secondary">Edit</Button>
-                  <Button
-                    onClick={(): void => {
-                      dispatch(dataActions.deleteItem(item.id));
-                      dispatch(uiActions.itemfocused(null));
-                    }}
-                    color="secondary"
-                  >
-                    Delete
-                  </Button>
+                  <Grid container justify="space-between">
+                    <Grid item>
+                      <Button
+                        color="secondary"
+                        onClick={(): void => {
+                          dispatch(
+                            dataActions.updateItem({
+                              ...item,
+                              completed: new Date().valueOf(),
+                            })
+                          );
+                          dispatch(uiActions.itemfocused(null));
+                        }}
+                      >
+                        Complete
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        // color="secondary"
+                        onClick={(): void => {
+                          dispatch(editItemActions.fieldUpdated(item));
+                          dispatch(uiActions.itemSelected(item));
+                        }}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        onClick={(): void => {
+                          dispatch(dataActions.deleteItem(item.id));
+                          dispatch(uiActions.itemfocused(null));
+                        }}
+                        // color="secondary"
+                      >
+                        Delete
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </CardActions>
               </Card>
             </Grid>
