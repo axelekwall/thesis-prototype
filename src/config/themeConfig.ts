@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { orange, grey } from '@material-ui/core/colors';
+import { grey, green } from '@material-ui/core/colors';
 
 export const drawerWidth = 300;
 
@@ -10,7 +10,7 @@ export const theme = createMuiTheme({
       main: grey['800'],
     },
     secondary: {
-      main: orange['500'],
+      main: green['300'],
     },
   },
 });

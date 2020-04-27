@@ -48,7 +48,7 @@ const PartitionTree = withTooltip<{ width: number; height: number }, FileNode>(
       (d) => d.children
     ).sum((d) => (d.size ? Math.sqrt(d.size) : 1));
     const maxItems = useMemo(() => {
-      let max = 0;
+      let max = 1;
       repoTree.forEach(
         (fileNode) => {
           const num = items.filter(
@@ -61,7 +61,9 @@ const PartitionTree = withTooltip<{ width: number; height: number }, FileNode>(
         },
         [repoTree, items]
       );
-      const rootNum = items.filter((item) => item.path === '/').length;
+      const rootNum = items.filter(
+        (item) => item.path === '/' && item.completed === undefined
+      ).length;
       if (rootNum > max) {
         max = rootNum;
       }
@@ -146,7 +148,7 @@ const PartitionTree = withTooltip<{ width: number; height: number }, FileNode>(
             <div style={{ color: 'white' }}>
               <strong>{tooltipData?.path}</strong>
             </div>
-            {/* <div>{tooltipData.bar.data[tooltipData.key]}</div> */}
+            {/* <div>{}</div> */}
           </TooltipWithBounds>
         )}
       </>

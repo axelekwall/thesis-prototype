@@ -33,13 +33,17 @@ const PieComponent = withTooltip<{ width: number; height: number }, any>(
     );
     const data = useMemo<Data>(() => {
       const data = {} as Data;
-      items.forEach((item) => {
-        if (data[item.type] !== undefined) {
-          data[item.type] += item.estimate;
-        } else {
-          data[item.type] = item.estimate;
-        }
-      });
+      items
+        .filter((item) => {
+          return item.completed === undefined;
+        })
+        .forEach((item) => {
+          if (data[item.type] !== undefined) {
+            data[item.type] += 1;
+          } else {
+            data[item.type] = 1;
+          }
+        });
       return data;
     }, [items]);
 
@@ -63,12 +67,11 @@ const PieComponent = withTooltip<{ width: number; height: number }, any>(
                   return (
                     <g key={arc.data[0]}>
                       <path
-                        onMouseEnter={(event): void => {
-                          // console.log(event.target);
+                        onMouseEnter={(): void => {
                           if (tooltipTimeout) clearTimeout(tooltipTimeout);
                           showTooltip({
                             tooltipData: arc.data,
-                            tooltipTop: height,
+                            tooltipTop: height / 2,
                             tooltipLeft: width / 2,
                           });
                         }}
@@ -81,18 +84,6 @@ const PieComponent = withTooltip<{ width: number; height: number }, any>(
                         fill={typeColor(arc.data[0] as DebtTypes)}
                         fillOpacity={1}
                       />
-                      {/* {hasSpaceForLabel && (
-                    <text
-                      fill={'white'}
-                      x={centroidX}
-                      y={centroidY}
-                      dy=".33em"
-                      fontSize={14}
-                      textAnchor="middle"
-                    >
-                      {arc.data[0]}
-                    </text>
-                  )} */}
                     </g>
                   );
                 })
@@ -113,7 +104,7 @@ const PieComponent = withTooltip<{ width: number; height: number }, any>(
             <div style={{ color: 'white' }}>
               <strong>{tooltipData[0]}</strong>
             </div>
-            <div>Estimate: {tooltipData[1]}</div>
+            <div>Items: {tooltipData[1]}</div>
           </TooltipWithBounds>
         )}
       </>

@@ -5,10 +5,9 @@ const initialState: DebtItem = {
   path: '/',
   deadline: 0,
   created: 0,
-  priority: 1,
-  estimate: 1,
+  priority: 'Normal',
   description: '',
-  id: '1',
+  id: '',
   title: '',
   type: 'Architectural',
 };

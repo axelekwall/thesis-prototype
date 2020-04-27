@@ -8,8 +8,6 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Typography,
-  Slider,
 } from '@material-ui/core';
 import useItemState from '../hooks/useItemState';
 import { KeyboardDatePicker } from '@material-ui/pickers';
@@ -65,7 +63,7 @@ const ItemForm: FC<Props> = ({ stateKey, action }) => {
             color="secondary"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <KeyboardDatePicker
             disableToolbar
             fullWidth
@@ -77,7 +75,7 @@ const ItemForm: FC<Props> = ({ stateKey, action }) => {
             onChange={createOnUpdate('deadline')}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <FormControl className={classes.formControl}>
             <InputLabel id="type-select-label">Type</InputLabel>
             <Select
@@ -94,39 +92,20 @@ const ItemForm: FC<Props> = ({ stateKey, action }) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={6}>
-          <Typography id="priority-slider" gutterBottom>
-            Priority
-          </Typography>
-          <Slider
-            defaultValue={1}
-            aria-labelledby="priority-slider"
-            valueLabelDisplay="auto"
-            step={1}
-            marks
-            color="secondary"
-            onChange={createOnUpdate('priority')}
-            value={newItem.priority}
-            min={1}
-            max={3}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Typography id="estimate-slider" gutterBottom>
-            Estimate
-          </Typography>
-          <Slider
-            defaultValue={1}
-            aria-labelledby="estimate-slider"
-            valueLabelDisplay="auto"
-            step={1}
-            marks
-            color="secondary"
-            onChange={createOnUpdate('estimate')}
-            value={newItem.estimate}
-            min={1}
-            max={5}
-          />
+        <Grid item xs={4}>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="priority-select-label">Priority</InputLabel>
+            <Select
+              labelId="priority-select-label"
+              value={newItem.priority}
+              color="secondary"
+              onChange={createOnUpdate('priority')}
+            >
+              <MenuItem value="Low">Low</MenuItem>
+              <MenuItem value="Normal">Normal</MenuItem>
+              <MenuItem value="High">High</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
     </form>

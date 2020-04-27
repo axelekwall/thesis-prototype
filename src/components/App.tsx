@@ -55,24 +55,8 @@ const App: FC = () => {
           <Typography onClick={reset} variant="h6" className={classes.title}>
             Tech Debt Tracker
           </Typography>
-          {/* <Button
-            color="secondary"
-            onClick={(): void => {
-              dispatch(uiActions.toggleNewItem(true));
-            }}
-          >
-            New Item
-          </Button> */}
         </Toolbar>
       </AppBar>
-      {/* <Drawer
-        variant="permanent"
-        className={classes.drawer}
-        classes={{ paper: classes.drawerPaper }}
-      >
-        <Toolbar />
-        {items.length > 0 && <SideBar />}
-      </Drawer> */}
       {repo.length > 0 ? <Main /> : <Loading />}
     </div>
   );

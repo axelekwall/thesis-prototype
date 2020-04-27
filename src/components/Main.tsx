@@ -72,14 +72,18 @@ const Main: FC = () => {
     (state) => state.data
   );
   const maxItems = useMemo(() => {
-    let max = 0;
+    let max = 1;
     repoTree.forEach((fileNode) => {
-      const num = items.filter((item) => item.path === fileNode.path).length;
+      const num = items.filter(
+        (item) => item.path === fileNode.path && item.completed === undefined
+      ).length;
       if (num > max) {
         max = num;
       }
     });
-    const rootNum = items.filter((item) => item.path === '/').length;
+    const rootNum = items.filter(
+      (item) => item.path === '/' && item.completed === undefined
+    ).length;
     if (rootNum > max) {
       max = rootNum;
     }
@@ -109,7 +113,7 @@ const Main: FC = () => {
         >
           <Toolbar />
           <NewItemCard />
-          <FileCard />
+          {/* <FileCard /> */}
           <ItemCard />
           <Grid item>
             <Paper className={classes.card}>
@@ -124,7 +128,14 @@ const Main: FC = () => {
                 </Grid>
                 <Grid item>
                   <LegendLinear
+                    itemDirection="column"
                     direction="row"
+                    labelFormat={(label): string => {
+                      if (label % 1 === 0) {
+                        return label.toString();
+                      }
+                      return '';
+                    }}
                     scale={scaleLinear({
                       domain: [0, maxItems],
                       range: [orange['100'], orange['400']],
@@ -139,7 +150,9 @@ const Main: FC = () => {
               <Paper className={classes.card}>
                 <Grid container direction="column" spacing={2}>
                   <Grid item>
-                    <Typography variant="h6">Debt Type Overview</Typography>
+                    <Typography variant="h6">
+                      Current Debt Type Distribution
+                    </Typography>
                   </Grid>
                   <Grid item>
                     <div className={classes.pieWrapper}>

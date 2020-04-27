@@ -62,9 +62,9 @@ const StackedBars = withTooltip<{ width: number; height: number }, any>(
           };
         }
         if (item.completed) {
-          data[itemDeadline].completed += item.estimate;
+          data[itemDeadline].completed += 1;
         } else {
-          data[itemDeadline].due += item.estimate;
+          data[itemDeadline].due += 1;
         }
       });
       return data;
@@ -173,10 +173,12 @@ const StackedBars = withTooltip<{ width: number; height: number }, any>(
             top={10}
             scale={yScale}
             stroke={'white'}
+            numTicks={1}
+            hideZero={true}
             tickStroke={'white'}
             tickLabelProps={(): any => ({
               fill: 'white',
-              fontSize: 11,
+              fontSize: 14,
             })}
           />
         </svg>
@@ -193,7 +195,7 @@ const StackedBars = withTooltip<{ width: number; height: number }, any>(
             <div style={{ color: 'white', textTransform: 'capitalize' }}>
               <strong>{tooltipData.key}</strong>
             </div>
-            <div>Estimate: {tooltipData.bar.data[tooltipData.key]}</div>
+            <div>Items: {tooltipData.bar.data[tooltipData.key]}</div>
           </TooltipWithBounds>
         )}
       </>

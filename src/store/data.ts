@@ -8,8 +8,8 @@ export type DebtTypes =
   | 'Architectural'
   | 'Environmental'
   | 'Testing';
-export type Priority = 1 | 2 | 3;
-export type Estimate = 1 | 2 | 3 | 5 | 8;
+export type Priority = 'Low' | 'Normal' | 'High';
+// export type Estimate = 1 | 2 | 3 | 5 | 8;
 
 export interface DebtItem {
   path: string;
@@ -17,7 +17,6 @@ export interface DebtItem {
   created: number;
   completed?: number;
   priority: Priority;
-  estimate: Estimate;
   description: string;
   type: DebtTypes;
   id: string;

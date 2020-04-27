@@ -20,6 +20,7 @@ import {
 } from '@material-ui/core';
 import { format } from 'date-fns';
 import typeColor from '../helpers/typeColor';
+import { blue, deepOrange } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +29,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       backgroundColor: theme.palette.primary.light,
+    },
+    pos: {
+      // fontSize: 14,
+    },
+    desc: {
+      marginTop: 12,
     },
   })
 );
@@ -52,7 +59,7 @@ const CardList: FC = () => {
   return (
     <Paper className={classes.root}>
       <Grid container direction="column" spacing={2}>
-        <Grid item>
+        <Grid item container justify="space-between">
           <Typography variant="h6">
             {selectedFile === null
               ? 'Backlog'
@@ -62,10 +69,29 @@ const CardList: FC = () => {
                     : ''
                 }`}
           </Typography>
+          {selectedFile && (
+            <Button
+              onClick={(): void => {
+                dispatch(uiActions.fileSelected(null));
+              }}
+            >
+              Clear
+            </Button>
+          )}
         </Grid>
         {items
           .filter(filterItems)
-          .sort((a, b) => a.deadline - b.deadline)
+          .sort((a, b) => {
+            if (a.priority === b.priority) {
+              return a.deadline - b.deadline;
+            } else if (a.priority === 'High' || b.priority === 'Low') {
+              return -1;
+            } else if (a.priority === 'Low' || b.priority === 'High') {
+              return 1;
+            } else {
+              return 0;
+            }
+          })
           .map((item) => (
             <Grid key={item.id} item>
               <Card
@@ -85,9 +111,8 @@ const CardList: FC = () => {
                     direction="row"
                   >
                     <Grid item>
-                      {' '}
                       <Typography color="textSecondary">
-                        {format(new Date(item.deadline), 'PPP')}
+                        Due {format(new Date(item.deadline), 'PPP')}
                       </Typography>
                     </Grid>
                     <Grid item>
@@ -101,15 +126,30 @@ const CardList: FC = () => {
                       ></div>
                     </Grid>
                   </Grid>
-
                   <Typography variant="h6">{item.title}</Typography>
-                  <Typography variant="body2">{item.description}</Typography>
+                  {item.priority !== 'Normal' && (
+                    <Typography
+                      style={{
+                        color:
+                          item.priority === 'High'
+                            ? deepOrange['400']
+                            : blue['200'],
+                      }}
+                      className={classes.pos}
+                    >
+                      {item.priority} priority
+                    </Typography>
+                  )}
+                  <Typography className={classes.desc} variant="body2">
+                    {item.description}
+                  </Typography>
                 </CardContent>
                 <CardActions>
                   <Grid container justify="space-between">
                     <Grid item>
                       <Button
                         color="secondary"
+                        variant="outlined"
                         onClick={(): void => {
                           dispatch(
                             dataActions.updateItem({
@@ -125,7 +165,6 @@ const CardList: FC = () => {
                     </Grid>
                     <Grid item>
                       <Button
-                        // color="secondary"
                         onClick={(): void => {
                           dispatch(editItemActions.fieldUpdated(item));
                           dispatch(uiActions.itemSelected(item));
@@ -138,7 +177,6 @@ const CardList: FC = () => {
                           dispatch(dataActions.deleteItem(item.id));
                           dispatch(uiActions.itemfocused(null));
                         }}
-                        // color="secondary"
                       >
                         Delete
                       </Button>
@@ -161,6 +199,7 @@ const CardList: FC = () => {
             }}
             color="secondary"
             fullWidth
+            variant="outlined"
           >
             New Item
           </Button>
