@@ -47,12 +47,13 @@ const items: Array<DebtItem> = [
   },
   {
     path: 'src/index.html',
-    type: 'Documentation',
-    description: 'Not good',
+    type: 'Code',
+    description:
+      'In oprder to improve page load performance we should defere some scripts from loading until we need them.',
     deadline: new Date(2020, 4, 23).valueOf(),
     created: new Date(2020, 0, 15).valueOf(),
     priority: 'High',
-    title: 'Missing documentation',
+    title: 'Defere som scripts',
     id: uuid(),
   },
   {
