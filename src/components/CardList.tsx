@@ -55,8 +55,8 @@ const CardList: FC = () => {
         <Grid item>
           <Typography variant="h6">
             {selectedFile === null
-              ? 'Debt items due soon'
-              : `Debt items for ${selectedFile.path}${
+              ? 'Backlog'
+              : `Backlog for ${selectedFile.path}${
                   selectedFile.type === 'tree' && selectedFile.level >= 1
                     ? '/'
                     : ''
