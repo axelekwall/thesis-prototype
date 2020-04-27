@@ -66,7 +66,13 @@ const NewItemCard: FC = () => {
             <ItemForm stateKey="newItem" action={newItemActions.fieldUpdated} />
           </Grid>
           <Grid item>
-            <Button onClick={saveItem} startIcon={<Save />}>
+            <Button
+              style={{ marginRight: 12 }}
+              onClick={saveItem}
+              color="secondary"
+              variant="outlined"
+              startIcon={<Save />}
+            >
               Save
             </Button>
             <Button

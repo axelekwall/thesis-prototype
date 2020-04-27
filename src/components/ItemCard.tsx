@@ -34,7 +34,7 @@ const ItemCard: FC = () => {
   return selectedItem !== null ? (
     <Grid item>
       <Paper className={classes.card}>
-        <Grid container direction="column">
+        <Grid container direction="column" spacing={2}>
           <Grid item container direction="row" justify="space-between">
             <Grid item>
               <Typography variant="h6">{selectedItem.title}</Typography>
@@ -51,7 +51,7 @@ const ItemCard: FC = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid item container direction="row">
+          <Grid item>
             <ItemForm
               stateKey="editItem"
               action={editItemActions.fieldUpdated}
@@ -64,6 +64,8 @@ const ItemCard: FC = () => {
                 dispatch(editItemActions.reset());
                 setSelectedItem(null);
               }}
+              color="secondary"
+              variant="outlined"
               startIcon={<Save />}
             >
               Save
