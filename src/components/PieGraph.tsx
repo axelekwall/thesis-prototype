@@ -64,7 +64,7 @@ const PieComponent = withTooltip<{ width: number; height: number }, any>(
                     <g key={arc.data[0]}>
                       <path
                         onMouseEnter={(event): void => {
-                          console.log(event.target);
+                          // console.log(event.target);
                           if (tooltipTimeout) clearTimeout(tooltipTimeout);
                           showTooltip({
                             tooltipData: arc.data,

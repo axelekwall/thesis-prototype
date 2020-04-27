@@ -51,8 +51,10 @@ const PartitionTree = withTooltip<{ width: number; height: number }, FileNode>(
       let max = 0;
       repoTree.forEach(
         (fileNode) => {
-          const num = items.filter((item) => item.path === fileNode.path)
-            .length;
+          const num = items.filter(
+            (item) =>
+              item.path === fileNode.path && item.completed === undefined
+          ).length;
           if (num > max) {
             max = num;
           }
@@ -80,8 +82,9 @@ const PartitionTree = withTooltip<{ width: number; height: number }, FileNode>(
           selectedFile?.path === d.data.path
         )
           return yellow['300'];
-        const debtItemCount = items.filter((item) => item.path === d.data.path)
-          .length;
+        const debtItemCount = items.filter(
+          (item) => item.path === d.data.path && item.completed === undefined
+        ).length;
         return colorScale(debtItemCount);
       },
       [focusedItem, items, focusedFile, selectedFile]

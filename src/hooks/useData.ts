@@ -6,14 +6,10 @@ import { actions, DataState } from '../store/data';
 import { State } from '../store';
 import { data as repoData } from '../data/repo';
 
-const url =
-  'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/dc9a6de41436a40aaedad0204cd681965ba58df4?recursive=true';
-const getRepoUrl =
-  'https://api.github.com/repos/axelekwall/thesis-prototype/commits';
-
-// TODO: Hello this is a comment /Testing
-
-// FIXME: This is a ref /Code
+// const url =
+//   'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/dc9a6de41436a40aaedad0204cd681965ba58df4?recursive=true';
+// const getRepoUrl =
+//   'https://api.github.com/repos/axelekwall/thesis-prototype/commits';
 
 // const fetcher = (): Promise<Repo> =>
 //   fetch(getRepoUrl)

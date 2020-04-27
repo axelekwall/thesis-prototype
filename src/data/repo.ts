@@ -1,18 +1,18 @@
 import { Repo } from '.';
 
 export const data = {
-  sha: '5b701e7c1cd5734b7e35ea0f9a955156da067caf',
+  sha: 'd2acc3ff288b82bb96dae335e68ae2028295c694',
   url:
-    'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/5b701e7c1cd5734b7e35ea0f9a955156da067caf',
+    'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/d2acc3ff288b82bb96dae335e68ae2028295c694',
   tree: [
     {
       path: '.eslintrc.js',
       mode: '100644',
       type: 'blob',
-      sha: '8cf0fa59717bb26571dc123fe1772c724869d1b9',
-      size: 1030,
+      sha: 'be9ddc704fdf41ab0b90d8e30d12e5effe254305',
+      size: 1061,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/8cf0fa59717bb26571dc123fe1772c724869d1b9',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/be9ddc704fdf41ab0b90d8e30d12e5effe254305',
     },
     {
       path: '.firebaserc',
@@ -27,10 +27,10 @@ export const data = {
       path: '.gitignore',
       mode: '100644',
       type: 'blob',
-      sha: '67045665db202cf951f839a5f3e73efdcfd45021',
-      size: 1610,
+      sha: 'afd1630df77a2aa5038ee56cdda653c0c4d4f2a4',
+      size: 1620,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/67045665db202cf951f839a5f3e73efdcfd45021',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/afd1630df77a2aa5038ee56cdda653c0c4d4f2a4',
     },
     {
       path: '.nvmrc',
@@ -186,62 +186,71 @@ export const data = {
       path: 'package.json',
       mode: '100644',
       type: 'blob',
-      sha: '79b3ca1e69c8f7a0135dc4bc7bf196de4d3a71c2',
-      size: 1754,
+      sha: '568663ef9ceae5945ea184b3f2cee330878d054a',
+      size: 1952,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/79b3ca1e69c8f7a0135dc4bc7bf196de4d3a71c2',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/568663ef9ceae5945ea184b3f2cee330878d054a',
     },
     {
       path: 'src',
       mode: '040000',
       type: 'tree',
-      sha: '7f1101adc6e33a7a43be41a0bc0f12bcc694d45d',
+      sha: '4624ce09bf8138ab4fc06d709966e6dd7b1aef46',
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/7f1101adc6e33a7a43be41a0bc0f12bcc694d45d',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/4624ce09bf8138ab4fc06d709966e6dd7b1aef46',
     },
     {
       path: 'src/components',
       mode: '040000',
       type: 'tree',
-      sha: 'e6bc7fc5d339ebbe84d625d53370bf5dd426fb04',
+      sha: 'f25ad06347e3e89c2b290b86f281a979b95a7c56',
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/e6bc7fc5d339ebbe84d625d53370bf5dd426fb04',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/f25ad06347e3e89c2b290b86f281a979b95a7c56',
     },
     {
       path: 'src/components/App.tsx',
       mode: '100644',
       type: 'blob',
-      sha: '670c5c7a71b52f1c7f7c26c8040787bfd6136120',
-      size: 2168,
+      sha: '4bfdf9193baa890efdf9ba486320bdb2c8e8b05d',
+      size: 2213,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/670c5c7a71b52f1c7f7c26c8040787bfd6136120',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/4bfdf9193baa890efdf9ba486320bdb2c8e8b05d',
     },
     {
       path: 'src/components/CardList.tsx',
       mode: '100644',
       type: 'blob',
-      sha: '8f2ce4ca8410c4e4bff2ae2f64fc38db403eeac1',
-      size: 2693,
+      sha: 'bf5ee3248f43a0d491c24ac70479e2f9df241f66',
+      size: 5577,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/8f2ce4ca8410c4e4bff2ae2f64fc38db403eeac1',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/bf5ee3248f43a0d491c24ac70479e2f9df241f66',
     },
     {
       path: 'src/components/FileCard.tsx',
       mode: '100644',
       type: 'blob',
-      sha: 'e69de29bb2d1d6434b8b29ae775ad8c2e48c5391',
-      size: 0,
+      sha: '26beb37ce5a91f279e7038491642676084ef4909',
+      size: 2007,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/26beb37ce5a91f279e7038491642676084ef4909',
     },
     {
       path: 'src/components/ItemCard.tsx',
       mode: '100644',
       type: 'blob',
-      sha: 'e69de29bb2d1d6434b8b29ae775ad8c2e48c5391',
-      size: 0,
+      sha: 'e73ed293e7feb122c88f36734f2e8fb29115619c',
+      size: 2206,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/e73ed293e7feb122c88f36734f2e8fb29115619c',
+    },
+    {
+      path: 'src/components/ItemForm.tsx',
+      mode: '100644',
+      type: 'blob',
+      sha: 'c711d2603cf7375354de350704af3f8480610147',
+      size: 3687,
+      url:
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/c711d2603cf7375354de350704af3f8480610147',
     },
     {
       path: 'src/components/Loading.tsx',
@@ -256,37 +265,55 @@ export const data = {
       path: 'src/components/Main.tsx',
       mode: '100644',
       type: 'blob',
-      sha: 'a1064718328965c734fcad2773c2fc539fd2b9c6',
-      size: 3609,
+      sha: 'd3148a3ca9f2367c0efc8e02e51279224f1469c3',
+      size: 4970,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/a1064718328965c734fcad2773c2fc539fd2b9c6',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/d3148a3ca9f2367c0efc8e02e51279224f1469c3',
     },
     {
-      path: 'src/components/NewItem.tsx',
+      path: 'src/components/NewItemCard.tsx',
       mode: '100644',
       type: 'blob',
-      sha: '719376a8cd20cf9635397168c8e387efab00db9d',
-      size: 2593,
+      sha: '571b19891b922f3f7e1529b583c25f507c119fa8',
+      size: 2533,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/719376a8cd20cf9635397168c8e387efab00db9d',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/571b19891b922f3f7e1529b583c25f507c119fa8',
+    },
+    {
+      path: 'src/components/PieGraph.tsx',
+      mode: '100644',
+      type: 'blob',
+      sha: 'd61ba8ae39dd59cae188ca4a7f269bbba03d7088',
+      size: 4046,
+      url:
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/d61ba8ae39dd59cae188ca4a7f269bbba03d7088',
     },
     {
       path: 'src/components/SideBar.tsx',
       mode: '100644',
       type: 'blob',
-      sha: 'a11e788cffeb093411c100df1adf347c5971913b',
+      sha: '356ad16c852e427d61297ff9c452806cd186f46d',
       size: 2151,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/a11e788cffeb093411c100df1adf347c5971913b',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/356ad16c852e427d61297ff9c452806cd186f46d',
     },
     {
-      path: 'src/components/TreeMap.tsx',
+      path: 'src/components/StackedBarGraph.tsx',
       mode: '100644',
       type: 'blob',
-      sha: '3493711e96f248c8308c4eec094572e57bb34e08',
-      size: 2264,
+      sha: '86bbad2c0b225fcb8a4b3c702f47550efdb62dcd',
+      size: 6131,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/3493711e96f248c8308c4eec094572e57bb34e08',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/86bbad2c0b225fcb8a4b3c702f47550efdb62dcd',
+    },
+    {
+      path: 'src/components/TreeGraph.tsx',
+      mode: '100644',
+      type: 'blob',
+      sha: '82913b23b49563dc0138434d3ca855c11cff8602',
+      size: 5102,
+      url:
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/82913b23b49563dc0138434d3ca855c11cff8602',
     },
     {
       path: 'src/config',
@@ -318,36 +345,36 @@ export const data = {
       path: 'src/data',
       mode: '040000',
       type: 'tree',
-      sha: 'f102282b1180ab30124843c604e724724ac880b6',
+      sha: 'b7994d48143609d7c0b872474c2f6ef82a59859a',
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/f102282b1180ab30124843c604e724724ac880b6',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/b7994d48143609d7c0b872474c2f6ef82a59859a',
     },
     {
       path: 'src/data/index.ts',
       mode: '100644',
       type: 'blob',
-      sha: '1a71d858fc606b430fa558b6cb31400c8c315203',
-      size: 1230,
+      sha: 'fab9ee1f514a61bcf7e3b39efa42bf4124d8aa12',
+      size: 1236,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/1a71d858fc606b430fa558b6cb31400c8c315203',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/fab9ee1f514a61bcf7e3b39efa42bf4124d8aa12',
     },
     {
       path: 'src/data/initialItems.ts',
       mode: '100644',
       type: 'blob',
-      sha: '9632146f597b5d5314ff9fc81e8c8682e10dc92b',
-      size: 898,
+      sha: 'b1b5c017f0cf477907e902d19e9863e2473f3d9c',
+      size: 1521,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/9632146f597b5d5314ff9fc81e8c8682e10dc92b',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/b1b5c017f0cf477907e902d19e9863e2473f3d9c',
     },
     {
       path: 'src/data/repo.ts',
       mode: '100644',
       type: 'blob',
-      sha: '274d7eeccf5ae9377fdf215d488931d514e7dc84',
-      size: 11062,
+      sha: '5bd56448a1b4c65cd112ab1b485153e1db5edbc9',
+      size: 16055,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/274d7eeccf5ae9377fdf215d488931d514e7dc84',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/5bd56448a1b4c65cd112ab1b485153e1db5edbc9',
     },
     {
       path: 'src/firebase.ts',
@@ -359,12 +386,38 @@ export const data = {
         'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/8dfbf854422f893be2367f8c431522644de8620e',
     },
     {
+      path: 'src/helpers',
+      mode: '040000',
+      type: 'tree',
+      sha: '1289b212c1fb0f53f61971600c07b296e81dc479',
+      url:
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/1289b212c1fb0f53f61971600c07b296e81dc479',
+    },
+    {
+      path: 'src/helpers/typeColor.ts',
+      mode: '100644',
+      type: 'blob',
+      sha: '2eddb3ed174542f276b2e1b93b7be82e91cd3056',
+      size: 439,
+      url:
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/2eddb3ed174542f276b2e1b93b7be82e91cd3056',
+    },
+    {
       path: 'src/hooks',
       mode: '040000',
       type: 'tree',
-      sha: '21df0bd4ac4f26805b2f1e69cd48b5770e5f1b56',
+      sha: '1868b3109dea6d94aae3a0295e133a472dc6ab92',
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/21df0bd4ac4f26805b2f1e69cd48b5770e5f1b56',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/1868b3109dea6d94aae3a0295e133a472dc6ab92',
+    },
+    {
+      path: 'src/hooks/interactions.ts',
+      mode: '100644',
+      type: 'blob',
+      sha: '702a244efbe9bb0877ffe8d51677d12be7ba50a2',
+      size: 1426,
+      url:
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/702a244efbe9bb0877ffe8d51677d12be7ba50a2',
     },
     {
       path: 'src/hooks/useAuth.ts',
@@ -379,19 +432,19 @@ export const data = {
       path: 'src/hooks/useData.ts',
       mode: '100644',
       type: 'blob',
-      sha: 'ad3cec80e21ff2584e558c400c2b42a73f69562a',
-      size: 1337,
+      sha: '30cf86a71557a0264eded5918a47da3cb76a191b',
+      size: 1411,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/ad3cec80e21ff2584e558c400c2b42a73f69562a',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/30cf86a71557a0264eded5918a47da3cb76a191b',
     },
     {
-      path: 'src/hooks/useNewItem.ts',
+      path: 'src/hooks/useItemState.ts',
       mode: '100644',
       type: 'blob',
-      sha: '702a65db2eaa3ab86ae0c41c749ef259cdfa4b21',
-      size: 859,
+      sha: 'd3599c7b012fedde37907d3117d61bd9505e841c',
+      size: 1039,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/702a65db2eaa3ab86ae0c41c749ef259cdfa4b21',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/d3599c7b012fedde37907d3117d61bd9505e841c',
     },
     {
       path: 'src/index.css',
@@ -424,9 +477,9 @@ export const data = {
       path: 'src/store',
       mode: '040000',
       type: 'tree',
-      sha: '49965fdeafa960239cbe2a10725dca6707be5b7c',
+      sha: '419b6e77a33d8d1c2c62f95244b69ce7d80461ad',
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/49965fdeafa960239cbe2a10725dca6707be5b7c',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/trees/419b6e77a33d8d1c2c62f95244b69ce7d80461ad',
     },
     {
       path: 'src/store/auth.ts',
@@ -441,37 +494,46 @@ export const data = {
       path: 'src/store/data.ts',
       mode: '100644',
       type: 'blob',
-      sha: '50d0e8627f71c72c790834383da6f1852a23a495',
-      size: 1353,
+      sha: '50f0a5fdae335b78b98b8d1d2909c8c27276fb8f',
+      size: 1884,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/50d0e8627f71c72c790834383da6f1852a23a495',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/50f0a5fdae335b78b98b8d1d2909c8c27276fb8f',
+    },
+    {
+      path: 'src/store/editItem.ts',
+      mode: '100644',
+      type: 'blob',
+      sha: 'af8db9827ad4d17175c20b5a8bf8440ddc205e2b',
+      size: 638,
+      url:
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/af8db9827ad4d17175c20b5a8bf8440ddc205e2b',
     },
     {
       path: 'src/store/index.ts',
       mode: '100644',
       type: 'blob',
-      sha: 'abc7d53565db23d55f897ba7f9e20ff74fff9816',
-      size: 439,
+      sha: '75656eaf69513f0c78ea3f2fa017729311572e28',
+      size: 486,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/abc7d53565db23d55f897ba7f9e20ff74fff9816',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/75656eaf69513f0c78ea3f2fa017729311572e28',
     },
     {
       path: 'src/store/newItem.ts',
       mode: '100644',
       type: 'blob',
-      sha: 'cbe8e1c9c03e1fcace83fd7d0e88ffeea99d32ad',
-      size: 667,
+      sha: 'c170739f43f1d2c36c24e02e1ce65519ca0622d5',
+      size: 638,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/cbe8e1c9c03e1fcace83fd7d0e88ffeea99d32ad',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/c170739f43f1d2c36c24e02e1ce65519ca0622d5',
     },
     {
       path: 'src/store/ui.ts',
       mode: '100644',
       type: 'blob',
-      sha: 'c28fb594ccbe0306cd4c058f207834a96ac0e006',
-      size: 1336,
+      sha: 'a05dfc0b6765aa775fc6ba7da194076867ee027c',
+      size: 1546,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/c28fb594ccbe0306cd4c058f207834a96ac0e006',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/a05dfc0b6765aa775fc6ba7da194076867ee027c',
     },
     {
       path: 'tsconfig.json',
@@ -486,10 +548,10 @@ export const data = {
       path: 'yarn.lock',
       mode: '100644',
       type: 'blob',
-      sha: 'bea7639a60b5f2da4310b4e0bbe665033519c418',
-      size: 315244,
+      sha: '87ae7ffcfbff2124d957031ab721e7fdf4a8aa13',
+      size: 321698,
       url:
-        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/bea7639a60b5f2da4310b4e0bbe665033519c418',
+        'https://api.github.com/repos/axelekwall/thesis-prototype/git/blobs/87ae7ffcfbff2124d957031ab721e7fdf4a8aa13',
     },
   ],
   truncated: false,
