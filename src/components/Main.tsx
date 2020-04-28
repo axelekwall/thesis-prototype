@@ -169,7 +169,7 @@ const Main: FC = () => {
               <Paper className={classes.card}>
                 <Grid container direction="column" spacing={2}>
                   <Grid item>
-                    <Typography variant="h6">Past and upcoming debt</Typography>
+                    <Typography variant="h6">Past and Upcoming Debt</Typography>
                   </Grid>
                   <Grid item>
                     <div className={classes.pieWrapper}>
